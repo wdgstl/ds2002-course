@@ -2,6 +2,8 @@
 
 Welcome to DS2002 Data Science Systems!
 
+William Giles:
+
 This repository manages your working environment during this course. Some course material
 and tools will be distributed in this way so that we all have a common set of tools, scripts, and datasets.
 
