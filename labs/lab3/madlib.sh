@@ -23,6 +23,7 @@ read -p "9. Please give me a verb: " VERB3
 
 read -p "10. Please give me an adverb: " ADV2
 
+echo " "
 echo "Once upon a time there was a $ADJ2 $NOUN1 named $ADJ1."
 echo " "
 echo "$ADJ1 loved to $VERB1 $ADV1 until one day, there was another $NOUN1 named $ADJ3."
