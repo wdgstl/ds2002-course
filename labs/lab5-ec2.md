@@ -6,7 +6,7 @@ This lab introduces the basics of updating your EC2 instance upon creation.
 
 **BEFORE** you start this lab, be sure to watch the How To: Create an EC2 Instance video if you are not familiar with the basics of creating an instance in EC2.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/n8XRNstKY6M?si=6-Sel4HujDR0QhX5" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<a href="https://www.youtube.com/embed/n8XRNstKY6M?si=6-Sel4HujDR0QhX5" target="_new"><img src="https://s3.amazonaws.com/ds2002-resources/images/ec2-yutube.png"></a> 
 
 1. Establish what you need to bootstrap upon instance creation. In this example you will be working with an Ubuntu Linux distribution. This means you will be using the `apt` package manager as a start, and loading other resources as necessary.
 
