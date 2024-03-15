@@ -103,3 +103,7 @@ Refer to Running commands on your Linux instance at Launch for more detail.
 - In environments where instances are being destroyed frequently, bootstrapping can take care of basic OS/package updates, and a change management tool (such as Ansible) can be used for updates, if needed.
 - Some organizatins never update instances after creation. Therefore, bootstrapping is the last point for refreshing and upgrading.
 - It is possible, though not common, for a bootstrapping action to hang. If this occurs, shell into the instance and try to debug. Or terminate the instance and try again.
+
+## WHAT TO SUBMIT
+
+Save your bootstrapping script as a file in your GitHub account. Submit the URL to the file in Canvas for review.
