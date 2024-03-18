@@ -118,9 +118,36 @@ Your GitHub Action is now building container images automatically. Let's connect
 
 4. Finally, click into the PACKAGE SETTINGS on the right-hand side. Scroll down and click "CHANGE VISIBILITY" - since we want this container image to be public. Select "Public" and type your container image name to confirm. Then select "I understand ..."
 
-## Make Changes and Push
+## Make Changes, Push, and Test
 
 Now edit the `app/main.py` file. Add an additional endpoint to return data of some kind. Add, commit, and change your changes.
 
 Verify that your changes trigger a build, and wait for the build to complete.
 
+Go to the home page of your forked repository in GitHub. Find the PACKAGES section lower on the right side. Click into it.
+
+Under the INSTALLATION section you will see a line something like
+
+```
+docker pull ghcr.io/USERNAME/fastapi-demo:1.X
+```
+
+Within GitPod or your own local environment, copy and run this line from your command-line terminal. (This requires Docker be installed.)
+
+Now run the container in detached mode, mapping the host port 8000 to the container port 80. Be sure to update the `USERNAME` to match your GitHub username, and match the `X` to the right version number of your container image:
+
+```
+docker run -d -p 8000:80 ghcr.io/USERNAME/fastapi-demo:1.X
+```
+
+If you are using GitPod, a new browser tab should open automatically.
+
+If you are developing locally, open a browser tab to http://127.0.0.1:8000/
+
+## Submit your work
+
+Submit two screenshots for this lab:
+
+1. Show the GitHub Actions tab for your repository showing at least THREE successful builds.
+
+2. Show a browser tab open to your running container either in Gitpod or locally. Be sure to include the address bar of the browser.
