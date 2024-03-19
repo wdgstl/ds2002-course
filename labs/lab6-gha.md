@@ -74,11 +74,11 @@ The better method for creating container images is to automate it using a `Docke
 
     A. Click on the SETTINGS tab.
 
-    B. Go to the SECRETE AND VARIABLES section. Select ACTIONS.
+    B. Go to the SECRETS AND VARIABLES section. Select ACTIONS.
 
     C. Create a NEW REPOSITORY SECRET. Give it the name `GHCR_PAT`. For the secret value, paste in the PAT token you created above.
 
-    D. Your GitHub Action is now ready to use this secret.
+    D. Your GitHub Action workflow is now ready to use this secret.
 
 6. **Enable workflows for your repository**
 
