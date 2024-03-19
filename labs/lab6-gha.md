@@ -84,7 +84,7 @@ The better method for creating container images is to automate it using a `Docke
 
     Finally, click on the ACTIONS tab of your repository. This is where you can see past runs of your workflow as well as current/pending runs.
 
-    Workflows have been disabled by default on your fork of the repository. Click the button to enable workflows.
+    Workflows have been disabled by default on your fork of the repository. **Click the button to enable workflows**.
 
 ## Test your build
 
