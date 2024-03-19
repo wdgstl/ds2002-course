@@ -4,6 +4,8 @@ Container images can be built by hand or by using automated tools. In this lab y
 
 > **NOTE**: To complete this lab you must first have forked this repository: https://github.com/nmagee/fastapi-demo. All work you complete in this lab will be using code from your fork of the repository, and pushing your changes there.
 
+Find a bug in this lab? Email nem2p@virginia.edu.
+
 ## Building Docker Images with a `Dockerfile`
 
 Docker allows you to run a container interactively, add software, edit/configure files and settings, and import code (among many other things). However, this approach takes time and is not always consistent.
