@@ -23,7 +23,7 @@ The better method for creating container images is to automate it using a `Docke
 
 ## Automating Builds using GitHub Actions
 
-2. **Edit your workflow**
+2. **Review your workflow**
    
     Open the `.github/workflows/build.yml` file and read its contents. There's a lot more to point out here, but these are the essential blocks of logic:
 
