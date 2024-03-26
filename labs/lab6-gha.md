@@ -122,7 +122,9 @@ Your GitHub Action is now building container images automatically. Let's connect
 
 ## Make Changes, Push, and Test
 
-Now edit the `app/main.py` file. Add an additional endpoint to return data of some kind. Add, commit, and change your changes.
+Now edit the `app/main.py` file. Add an additional endpoint to return data of some kind. Verify that your application runs smoothly by running `./preview.sh` and does not trigger errors.
+
+Then add, commit, and change your changes.
 
 Verify that your changes trigger a build, and wait for the build to complete.
 
