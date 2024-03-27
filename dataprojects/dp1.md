@@ -195,8 +195,8 @@ Now let's write a new API endpoint that will retrieve your table data and return
     To close the connection, add this line before your `return` command:
 
     ```
-    db.close()
-    return results
+        db.close()
+        return results
     ```
 
     Closing connections after each request is an important practice for data scientists and developers. Connections left open take up possible connections used elsewhere, and remain open until they time out.
