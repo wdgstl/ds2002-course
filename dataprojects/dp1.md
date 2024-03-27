@@ -7,6 +7,20 @@ In this Data Project you will build on your FastAPI code by providing data dynam
 - The container will be running in Amazon EC2.
 - Finally, a simple web page will display your API data visually.
 
+- - -
+Here are the steps:
+- [Data Project 1: Build a Data-driven API](#data-project-1-build-a-data-driven-api)
+  - [1. Setup](#1-setup)
+    - [Set Environment Variables](#set-environment-variables)
+    - [Python Installation](#python-installation)
+    - [Update your `Dockerfile`](#update-your-dockerfile)
+    - [Python Imports](#python-imports)
+    - [Static Files](#static-files)
+  - [2. Database Prep](#2-database-prep)
+  - [3. Connect FastAPI to the Database](#3-connect-fastapi-to-the-database)
+  - [4. Add an endpoint to fetch a single album](#4-add-an-endpoint-to-fetch-a-single-album)
+  - [5. Submit your work](#5-submit-your-work)
+
 ## 1. Setup
 
 This data project assumes you have successfully completed **Lab 6** and that pushes to your `fastapi-demo` repository build container images successfully. If you have not completed this step, you must before you can continue.
@@ -35,7 +49,7 @@ This installation allows you to import the `MySQLdb` package for database commun
 
 If you are developing locally and run into installation problems with this package, you'll need to Google around for a working solution.
 
-## Update your `Dockerfile`
+### Update your `Dockerfile`
 
 The `Dockerfile` in your project needs a few more pieces of software for database communications. Add the second line below so that your entire `Dockerfile` looks like this:
 
@@ -229,7 +243,7 @@ Now let's write a new API endpoint that will retrieve your table data and return
 
 17. Add, Commit, and Push your code to GitHub. Be sure your container builds are successful in GitHub Actions. Debug as necessary.
 
-## Submit your work
+## 5. Submit your work
 
 You will need to submit three (3) pieces for this Data Project:
 
