@@ -86,7 +86,7 @@ These lines configure FastAPI to display static pages and populate three new var
 
 ### Static Files
 
-Within the `app/` directory of your FastAPI, create a new subdirectory named `static`. Inside that new directory, copy three files:
+Within the `app/` directory of your FastAPI, create a new subdirectory named `static/`. Inside that new directory, copy three files:
 
 - [`index.html`](static/index.html) - A simple framework to display your API data for humans.
 - [`script.js`](static/script.js) - The logic of the page that communicates with your API.
@@ -167,7 +167,7 @@ Now let's write a new API endpoint that will retrieve your table data and return
     def get_albums():
     ```
 
-10. Next, as part of your function, set up a database connection. This will be a `MySQLdb.connection` object, which means you can reuse the connection and all of its available methods. Use the connection string below but **update** your `db` name.
+10. Next, as part of your function, set up a database connection. This will be a `MySQLdb.connection` object, which means you can reuse the connection and all of its available methods. Use the connection string and be sure the `DB` value is set as a variable in your code.
 
     ```
         db = MySQLdb.connect(host=HOST, user=USER, passwd=PASS, db=DB)
@@ -201,6 +201,18 @@ Now let's write a new API endpoint that will retrieve your table data and return
 
     Closing connections after each request is an important practice for data scientists and developers. Connections left open take up possible connections used elsewhere, and remain open until they time out.
 
+    Your complete new endpoint should look something like this:
+    ```
+    @app.get("/albums")
+    def get_all_albums():
+        db = MySQLdb.connect(host=HOST, user=USER, passwd=PASS, db=DB)
+        c = db.cursor(MySQLdb.cursors.DictCursor)
+        c.execute("SELECT * FROM albums ORDER BY name")
+        results = c.fetchall()
+        db.close()
+        return results
+    ```
+
 14. Test your API by adding another album entry to the database and refresh to see if your endpoint returns the new results.
 
 15. View the results of a simple JavaScript web page pointed to your albums API endpoint. Add the following endpoint to the end of your Gitpod or local URL:
@@ -226,8 +238,9 @@ Now let's write a new API endpoint that will retrieve your table data and return
         c.execute("SELECT * FROM albums WHERE id=" + id)
         results = c.fetchall()
         db.close()
-        return results[0]
+        return results
     ```
+    Note the SQL syntax has changed, now including a `WHERE` statement and removing the `ORDER BY` statement.
 
     Be sure that your `./preview.sh` script is running the local `uvicorn` server. Now append one of your album IDs after `/albums` like this:
 
@@ -238,12 +251,11 @@ Now let's write a new API endpoint that will retrieve your table data and return
 
     ![API single album](https://s3.amazonaws.com/ds2002-resources/images/single-album.png)
 
-
 17. Add, Commit, and Push your code to GitHub. Be sure your container builds are successful in GitHub Actions. Debug as necessary.
 
 ## 5. Run your project container
 
-Stop your `./preview.sh` script running either locally or in Gitpod. Assuming your container images are successfully building in GitHub, let's now run your entire API container.
+Stop your `./preview.sh` script running either locally or in Gitpod, as well as your PhpMyAdmin container. Assuming your FastAPI container images are successfully building in GitHub Actions, let's now run your completed API container.
 
 Either locally or in Gitpod, run the following command. Update the URL accordingly with your own GitHub username:
 
