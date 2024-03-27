@@ -175,16 +175,16 @@ Now let's write a new API endpoint that will retrieve your table data and return
 11. Next we will create a cursor, which is what executes SQL against the database service. The cursor will then execute some SQL and fetch the results. Copy this code and paste it below your DB connection string:
 
     ```
-    c = db.cursor(MySQLdb.cursors.DictCursor)
-    c.execute("""SELECT * FROM albums ORDER BY name""")
-    results = c.fetchall()
+        c = db.cursor(MySQLdb.cursors.DictCursor)
+        c.execute("""SELECT * FROM albums ORDER BY name""")
+        results = c.fetchall()
     ```
     Notice the SQL here selects all rows from your `albums` table and orders them alphabetically by album name. It is wrapped in triple quotes as a visual cue to developers (but regular quotes work fine)
 
 12. At this point you can test your results by adding a final line:
 
     ```
-    return results
+        return results
     ```
     And then run `./preview.sh` in either Gitpod or locally. Using either the Gitpod URL or your local `http://127.0.0.1:8000/` address, add `/albums` to the URL and check for your albums to be returned. The server will display your data in JSON format. This is because your cursor was declared as a `DictCursor` and therefor returned data arrays as dictionaries, which Python can easily convert into JSON.
 
