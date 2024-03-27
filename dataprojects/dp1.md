@@ -33,6 +33,20 @@ python3 -m pip install mysqlclient
 
 This installation allows you to import the `MySQLdb` package for database communications.
 
+If you are developing locally and run into installation problems with this package, you'll need to Google around for a working solution.
+
+## Update your `Dockerfile`
+
+The `Dockerfile` in your project needs a few more pieces of software for database communications. Add the second line below so that your entire `Dockerfile` looks like this:
+
+```
+FROM tiangolo/uvicorn-gunicorn-fastapi:python3.9-alpine3.14
+RUN apk add musl-dev mariadb-connector-c-dev gcc
+COPY ./app /app
+COPY requirements.txt requirements.txt
+RUN pip install --upgrade pip && pip install -r requirements.txt
+```
+
 ### Python Imports
 
 Add the following entries to the top of your `app/main.py` file:
@@ -128,3 +142,60 @@ Copy this script and paste **BUT EDIT** the name of the database before `albums`
 8. Repeat this process until you have 10 entries in your database.
 
 ## 3. Connect FastAPI to the Database
+
+You have now installed the necessary libraries and software for FastAPI to communicate with a database, you have updated your `Dockerfile` to match those changes, and you have created a data table with data in it.
+
+Now let's write a new API endpoint that will retrieve your table data and return it in JSON.
+
+1. Create a new FastAPI endpoint decorator `("/albums)` using the **GET** method. Add a new function below it with a unique name. It does not require a parameter.
+
+    ```
+    @app.get("/albums")
+    def get_albums():
+    ```
+
+2. Next, as part of your function, set up a database connection. This will be a `MySQLdb.connection` object, which means you can reuse the connection and all of its available methods. Use the connection string below but **update** your `db` name.
+
+    ```
+        db = MySQLdb.connect(host=HOST, user=USER, passwd=PASS, db="mst3k")
+    ```
+3. Next we will create a cursor, which is what executes SQL against the database service. The cursor will then execute some SQL and fetch the results. Copy this code and paste it below your DB connection string:
+
+    ```
+    c = db.cursor(MySQLdb.cursors.DictCursor)
+    c.execute("""SELECT * FROM albums ORDER BY name""")
+    results = c.fetchall()
+    ```
+
+    Notice the SQL here selects all rows from your `albums` table and orders them alphabetically by album name. It is wrapped in triple quotes as a visual cue to developers (but regular quotes are fine)
+
+4. At this point you can test your results by adding a final line:
+
+    ```
+    return results
+    ```
+    And then run `./preview.sh` in either Gitpod or locally. Using either the Gitpod URL or your local `http://127.0.0.1:8000/` address, add `/albums` to the URL and check for your albums to be returned. The server will display your data in JSON format. This is because your cursor was declared as a `DictCursor` and therefor returned data arrays as dictionaries, which Python can easily convert into JSON.
+
+    ![API image rendering](https://s3.amazonaws.com/ds2002-resources/images/albums-json.png)
+
+5. However, if you were to add more entries to your DB table at this point and refresh the API page, you would not see any new values. This is because the database connection has been opened and the query executed, but the connection was not closed, so no new fetch will occur.
+
+    To close the connection, add this line before your `return`:
+
+    ```
+    db.close()
+    return results
+    ```
+
+    Closing connections after each request is a healthy practice for all data scientists and developers. Connections left open take up possible connections used elsewhere, and remain open until they time out.
+
+6. Now test your API by adding another album entry to the database and see if your endpoint returns the new results.
+
+7. View the results of a simple JavaScript web page pointed to this API. Add the following endpoint to the end of your Gitpod or local URL:
+
+    ```
+    /static/index.html
+    ```
+
+    You will see something like this:
+    ![API image rendering](https://s3.amazonaws.com/ds2002-resources/images/api-results.png)
