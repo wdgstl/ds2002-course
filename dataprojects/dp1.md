@@ -1,10 +1,9 @@
 # Data Project 1: Build a Data-driven API
 
-In this Data Project you will build on your FastAPI code by providing data dynamically to your API.
+In this Data Project you will build on your FastAPI code by providing data dynamically to your API from a database.
 
 - The database will be a MySQL RDS instance running in AWS.
-- The API will be your FastAPI instance running in a container.
-- The container will be running in Amazon EC2.
+- The API will be your FastAPI instance built into a container.
 - Finally, a simple web page will display your API data visually.
 
 - - -
@@ -19,7 +18,8 @@ Here are the steps:
   - [2. Database Prep](#2-database-prep)
   - [3. Connect FastAPI to the Database](#3-connect-fastapi-to-the-database)
   - [4. Add an endpoint to fetch a single album](#4-add-an-endpoint-to-fetch-a-single-album)
-  - [5. Submit your work](#5-submit-your-work)
+  - [5. Run your project container](#5-run-your-project-container)
+  - [6. Submit your work](#6-submit-your-work)
 
 ## 1. Setup
 
@@ -29,10 +29,9 @@ You may either develop/test your code locally or using Gitpod. There is no prefe
 
 ### Set Environment Variables
 
-1. Follow the instructions found at this page in Canvas and set your `DBHOST`, `DBUSER`, and `DBPASS` environment variables.
-2. You will need to inject these same variables into your container when you run it in Amazon EC2 near the end of this project.
+Follow the instructions found at [**this page**](https://canvas.its.virginia.edu/courses/105117/pages/rds-credentials) in Canvas and set your `DBHOST`, `DBUSER`, and `DBPASS` environment variables in your development environment.
 
-These `ENV` variables provide a server, username, and password for your code to communicate with the MySQL service.
+These `ENV` variables provide a server, username, and password for your Python to communicate with the MySQL service.
 
 ### Python Installation
 
@@ -81,10 +80,9 @@ app.mount("/static", StaticFiles(directory="static", html=True), name="static")
 HOST = os.environ.get('DBHOST')
 USER = os.environ.get('DBUSER')
 PASS = os.environ.get('DBPASS')
-DB = "mst3k"  # replace with your database name
+DB = "mst3k"  # replace with your UVA computing ID / database name
 ```
 These lines configure FastAPI to display static pages and populate three new variables with the `ENV` variables you set above.
-
 
 ### Static Files
 
@@ -172,7 +170,7 @@ Now let's write a new API endpoint that will retrieve your table data and return
 10. Next, as part of your function, set up a database connection. This will be a `MySQLdb.connection` object, which means you can reuse the connection and all of its available methods. Use the connection string below but **update** your `db` name.
 
     ```
-        db = MySQLdb.connect(host=HOST, user=USER, passwd=PASS, db="mst3k")
+        db = MySQLdb.connect(host=HOST, user=USER, passwd=PASS, db=DB)
     ```
 11. Next we will create a cursor, which is what executes SQL against the database service. The cursor will then execute some SQL and fetch the results. Copy this code and paste it below your DB connection string:
 
@@ -181,7 +179,7 @@ Now let's write a new API endpoint that will retrieve your table data and return
     c.execute("""SELECT * FROM albums ORDER BY name""")
     results = c.fetchall()
     ```
-    Notice the SQL here selects all rows from your `albums` table and orders them alphabetically by album name. It is wrapped in triple quotes as a visual cue to developers (but regular quotes are fine)
+    Notice the SQL here selects all rows from your `albums` table and orders them alphabetically by album name. It is wrapped in triple quotes as a visual cue to developers (but regular quotes work fine)
 
 12. At this point you can test your results by adding a final line:
 
@@ -192,23 +190,23 @@ Now let's write a new API endpoint that will retrieve your table data and return
 
     ![API image rendering](https://s3.amazonaws.com/ds2002-resources/images/albums-json.png)
 
-13. However, if you were to add more entries to your DB table at this point and refresh the API page, you would not see any new values. This is because the database connection has been opened and the query executed, but the connection was not closed, so no new fetch will occur.
+13. However, if you were to add more entries to your DB table at this point and refresh the API page, you would not see any new values. This is because the database connection has been opened and the query executed, but the connection was not closed, so no new fetches will occur.
 
-    To close the connection, add this line before your `return`:
+    To close the connection, add this line before your `return` command:
 
     ```
     db.close()
     return results
     ```
 
-    Closing connections after each request is a healthy practice for all data scientists and developers. Connections left open take up possible connections used elsewhere, and remain open until they time out.
+    Closing connections after each request is an important practice for data scientists and developers. Connections left open take up possible connections used elsewhere, and remain open until they time out.
 
-14. Now test your API by adding another album entry to the database and see if your endpoint returns the new results.
+14. Test your API by adding another album entry to the database and refresh to see if your endpoint returns the new results.
 
 15. View the results of a simple JavaScript web page pointed to your albums API endpoint. Add the following endpoint to the end of your Gitpod or local URL:
 
     ```
-    /static/
+    /static/index.html
     ```
 
     You will see something like this:
@@ -243,7 +241,27 @@ Now let's write a new API endpoint that will retrieve your table data and return
 
 17. Add, Commit, and Push your code to GitHub. Be sure your container builds are successful in GitHub Actions. Debug as necessary.
 
-## 5. Submit your work
+## 5. Run your project container
+
+Stop your `./preview.sh` script running either locally or in Gitpod. Assuming your container images are successfully building in GitHub, let's now run your entire API container.
+
+Either locally or in Gitpod, run the following command. Update the URL accordingly with your own GitHub username:
+
+```
+docker run -d -p 8080:80 -e DBHOST=$DBHOST -e DBUSER=$DBUSER -e DBPASS=$DBPASS ghcr.io/nmagee/fastapi-demo:latest
+```
+
+In Gitpod a new tab should automatically open to your API. If you are developing locally, open a browser to http://127.0.0.1:8080/
+
+Explore the three new endpoints you created:
+
+- http://API-URL/albums
+- http://API-URL/albums/4
+- http://API-URL/static/index.html
+
+Try adding or removing albums to your database table and verify the results are visible in your API.
+
+## 6. Submit your work
 
 You will need to submit three (3) pieces for this Data Project:
 
