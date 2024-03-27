@@ -62,18 +62,19 @@ These imports let you use environment variables within your code, communicate wi
 Next, below your instantiation of the `app = FastAPI()` object, enter these lines:
 
 ```
-app.mount("/static", StaticFiles(directory="static"), name="static")
+app.mount("/static", StaticFiles(directory="static", html=True), name="static")
 
 HOST = os.environ.get('DBHOST')
 USER = os.environ.get('DBUSER')
 PASS = os.environ.get('DBPASS')
+DB = "mst3k"  # replace with your database name
 ```
 These lines configure FastAPI to display static pages and populate three new variables with the `ENV` variables you set above.
 
 
 ### Static Files
 
-Within the `app/` directory of your FastAPI, create a new subdirectory named `static`. Inside of it, copy these three files:
+Within the `app/` directory of your FastAPI, create a new subdirectory named `static`. Inside that new directory, copy three files:
 
 - [`index.html`](static/index.html) - A simple framework to display your API data for humans.
 - [`script.js`](static/script.js) - The logic of the page that communicates with your API.
@@ -87,7 +88,7 @@ The static page configuration now means that your FastAPI deployment has an addi
 
 ## 2. Database Prep
 
-1. Run a PhpMyAdmin container either locally or in Gitpod using these instructions. Connect to the RDS instance using these credentials. This will give you a GUI for interacting with your database.
+1. Run a PhpMyAdmin container either locally or in Gitpod using [**these instructions**](https://canvas.its.virginia.edu/courses/105117/pages/web-ui-for-mysql-phpmyadmin). Connect to the RDS instance using [**these credentials**](https://canvas.its.virginia.edu/courses/105117/pages/rds-credentials). This will give you a GUI for interacting with your database.
 
 2. Following the instructions from class, create a new database (if you haven't already) with your UVA user ID as the name (i.e. `nem2p` or `mst3k` etc.)
 
@@ -147,29 +148,28 @@ You have now installed the necessary libraries and software for FastAPI to commu
 
 Now let's write a new API endpoint that will retrieve your table data and return it in JSON.
 
-1. Create a new FastAPI endpoint decorator `("/albums)` using the **GET** method. Add a new function below it with a unique name. It does not require a parameter.
+9. Create a new FastAPI endpoint decorator `("/albums)` using the **GET** method. Add a new function below it with a unique name. It does not require a parameter.
 
     ```
     @app.get("/albums")
     def get_albums():
     ```
 
-2. Next, as part of your function, set up a database connection. This will be a `MySQLdb.connection` object, which means you can reuse the connection and all of its available methods. Use the connection string below but **update** your `db` name.
+10. Next, as part of your function, set up a database connection. This will be a `MySQLdb.connection` object, which means you can reuse the connection and all of its available methods. Use the connection string below but **update** your `db` name.
 
     ```
         db = MySQLdb.connect(host=HOST, user=USER, passwd=PASS, db="mst3k")
     ```
-3. Next we will create a cursor, which is what executes SQL against the database service. The cursor will then execute some SQL and fetch the results. Copy this code and paste it below your DB connection string:
+11. Next we will create a cursor, which is what executes SQL against the database service. The cursor will then execute some SQL and fetch the results. Copy this code and paste it below your DB connection string:
 
     ```
     c = db.cursor(MySQLdb.cursors.DictCursor)
     c.execute("""SELECT * FROM albums ORDER BY name""")
     results = c.fetchall()
     ```
-
     Notice the SQL here selects all rows from your `albums` table and orders them alphabetically by album name. It is wrapped in triple quotes as a visual cue to developers (but regular quotes are fine)
 
-4. At this point you can test your results by adding a final line:
+12. At this point you can test your results by adding a final line:
 
     ```
     return results
@@ -178,7 +178,7 @@ Now let's write a new API endpoint that will retrieve your table data and return
 
     ![API image rendering](https://s3.amazonaws.com/ds2002-resources/images/albums-json.png)
 
-5. However, if you were to add more entries to your DB table at this point and refresh the API page, you would not see any new values. This is because the database connection has been opened and the query executed, but the connection was not closed, so no new fetch will occur.
+13. However, if you were to add more entries to your DB table at this point and refresh the API page, you would not see any new values. This is because the database connection has been opened and the query executed, but the connection was not closed, so no new fetch will occur.
 
     To close the connection, add this line before your `return`:
 
@@ -189,13 +189,50 @@ Now let's write a new API endpoint that will retrieve your table data and return
 
     Closing connections after each request is a healthy practice for all data scientists and developers. Connections left open take up possible connections used elsewhere, and remain open until they time out.
 
-6. Now test your API by adding another album entry to the database and see if your endpoint returns the new results.
+14. Now test your API by adding another album entry to the database and see if your endpoint returns the new results.
 
-7. View the results of a simple JavaScript web page pointed to this API. Add the following endpoint to the end of your Gitpod or local URL:
+15. View the results of a simple JavaScript web page pointed to your albums API endpoint. Add the following endpoint to the end of your Gitpod or local URL:
 
     ```
-    /static/index.html
+    /static/
     ```
 
     You will see something like this:
+
     ![API image rendering](https://s3.amazonaws.com/ds2002-resources/images/api-results.png)
+
+
+## 4. Add an endpoint to fetch a single album
+
+16. Copy the entire `@` decorator and function you just wrote, but append a `{id}` variable and rename the function, passing in the `id` parameter. It should look something like this:
+
+    ```
+    @app.get("/albums/{id}")
+    def get_one_album(id):
+        db = MySQLdb.connect(host=HOST, user=USER, passwd=PASS, db="mst3k")
+        c = db.cursor(MySQLdb.cursors.DictCursor)
+        c.execute("SELECT * FROM albums WHERE id=" + id)
+        results = c.fetchall()
+        db.close()
+        return results[0]
+    ```
+
+    Be sure that your `./preview.sh` script is running the local `uvicorn` server. Now append one of your album IDs after `/albums` like this:
+
+    ```
+    http://127.0.0.1:8000/albums/8
+    ```
+    And you will fetch the data for a single album.
+
+    ![API single album](https://s3.amazonaws.com/ds2002-resources/images/single-album.png)
+
+
+17. Add, Commit, and Push your code to GitHub. Be sure your container builds are successful in GitHub Actions. Debug as necessary.
+
+## Submit your work
+
+You will need to submit three (3) pieces for this Data Project:
+
+- A screenshot of your `/albums` JSON from your web browser
+- A screenshot of your `/static/` page showing cards for all your albums.
+- The URL to your `app/main.py` code in GitHub.
