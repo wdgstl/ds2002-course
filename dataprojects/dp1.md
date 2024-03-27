@@ -260,7 +260,7 @@ Stop your `./preview.sh` script running either locally or in Gitpod, as well as 
 Either locally or in Gitpod, run the following command. Update the URL accordingly with your own GitHub username:
 
 ```
-docker run -d -p 8080:80 -e DBHOST=$DBHOST -e DBUSER=$DBUSER -e DBPASS=$DBPASS ghcr.io/nmagee/fastapi-demo:latest
+docker run -d -p 8080:80 -e DBHOST=$DBHOST -e DBUSER=$DBUSER -e DBPASS=$DBPASS ghcr.io/GITHUB-USERNAME/fastapi-demo:latest
 ```
 
 In Gitpod a new tab should automatically open to your API. If you are developing locally, open a browser to http://127.0.0.1:8080/
