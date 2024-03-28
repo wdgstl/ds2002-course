@@ -13,11 +13,12 @@ Here are the steps:
     - [Set Environment Variables](#set-environment-variables)
     - [Python Installation](#python-installation)
     - [Update your `Dockerfile`](#update-your-dockerfile)
+    - [Gitpod Configuration](#gitpod-configuration)
     - [Python Imports](#python-imports)
     - [Static Files](#static-files)
     - [Preview Script](#preview-script)
   - [2. Database Prep](#2-database-prep)
-  - [3. Connect FastAPI to the Database](#3-connect-fastapi-to-the-database)
+  - [3. Connect FastAPI to your Database](#3-connect-fastapi-to-your-database)
   - [4. Add an endpoint to fetch a single album](#4-add-an-endpoint-to-fetch-a-single-album)
   - [5. Run your project container](#5-run-your-project-container)
   - [6. Submit your work](#6-submit-your-work)
@@ -61,12 +62,15 @@ COPY requirements.txt requirements.txt
 RUN pip install --upgrade pip && pip install -r requirements.txt
 ```
 
+### Gitpod Configuration
+
+If using Gitpod, edit `.gitpod.yml` and update the `port` value from 8000 to 8000-9000.
+
 ### Python Imports
 
 Add the following entries to the top of your `app/main.py` file:
 
 ```
-import json   # if not already present
 import os
 import MySQLdb
 from fastapi.staticfiles import StaticFiles
@@ -78,9 +82,9 @@ Next, below your instantiation of the `app = FastAPI()` object, enter these line
 ```
 app.mount("/static", StaticFiles(directory="static", html=True), name="static")
 
-HOST = os.environ.get('DBHOST')
-USER = os.environ.get('DBUSER')
-PASS = os.environ.get('DBPASS')
+DBHOST = os.environ.get('DBHOST')
+DBUSER = os.environ.get('DBUSER')
+DBPASS = os.environ.get('DBPASS')
 DB = "mst3k"  # replace with your UVA computing ID / database name
 ```
 These lines configure FastAPI to display static pages and populate three new variables with the `ENV` variables you set above.
@@ -118,25 +122,28 @@ cd app/
 ```
 
 ## 2. Database Prep
+   
+1. Run a PhpMyAdmin container either locally or in Gitpod using the command below. This will give you a GUI for interacting with your database.
 
-1. Run a PhpMyAdmin container either locally or in Gitpod using [**these instructions**](https://canvas.its.virginia.edu/courses/105117/pages/web-ui-for-mysql-phpmyadmin). Connect to the RDS instance using [**these credentials**](https://canvas.its.virginia.edu/courses/105117/pages/rds-credentials). This will give you a GUI for interacting with your database.
+    ```
+    docker run -d -e PMA_HOST=$DBHOST -e PMA_USER=$DBUSER -e PMA_PASSWORD=$DBPASS -p 8001:80 phpmyadmin
+    ```
 
-2. Following the instructions from class, create a new database (if you haven't already) with your UVA user ID as the name (i.e. `nem2p` or `mst3k` etc.)
+3. Following the instructions from class, create a new database (if you haven't already) with your UVA user ID as the name (i.e. `nem2p` or `mst3k` etc.) Do this by clicking on "New" at the top of the list of databases in the lefthand navigation. Then provide a database name, leave the collation selection as-is, and press CREATE.
 
-3. Click into your database on the left. Using the "Create new table" field on the page, create a table named `albums` with 5 columns.
+4. Click into your database on the left. Then click on the "SQL" tab at the top of the screen. You will be given a large text box to run SQL queries against your database. 
 
-4. Click on the "SQL" tab at the top of the screen. You will be given a large text box to run SQL queries against your database. 
-Copy this script and paste **BUT EDIT** the name of the database before `albums` (where it says `mst3k` below replace it with your DB name) and then press GO.
+5. Copy this script and paste **BUT EDIT** the name of the database before `albums` (where it says `mst3k` below replace it with your DB name) and then press GO.
 
     ```
     CREATE TABLE `mst3k`.`albums` (`id` INT NOT NULL AUTO_INCREMENT , `name` VARCHAR(30) NULL , `artist` VARCHAR(30) NULL , `genre` VARCHAR(15) NULL , `year` INT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
     ```
 
-5. The command should execute quickly and you will see your `albums` table appear on the left. Click into that. Note that it is empty, i.e. it has no records.
+6. The command should execute quickly and you will see your `albums` table appear on the left under your database. Click into that. Note that it is empty, i.e. it has no records.
 
-6. Click on the INSERT tab at the top of the screen. Using the top form entry, add a favorite album of yours to the database. Leave the ID entry empty, but add an album NAME, ARTIST, GENRE, and YEAR. Then press GO to save it.
+7. Click on the INSERT tab at the top of the screen. Using the top form entry, add a favorite album of yours to the database. Leave the ID entry empty, but add an album NAME, ARTIST, GENRE, and YEAR. Then press GO to save it.
 
-7. Next let's add more entries using direct SQL. Click into the SQL tab again. Copy the code below and modify it for another entry. The `id` should have the value of `NULL` (no quotes) and the `year` should have a 4-digit integer value (no quotes):
+8. Next let's add more entries using direct SQL. Click into the SQL tab again. Copy the code below and modify it for another entry. The `id` should have the value of `NULL` (no quotes) and the `year` should have a 4-digit integer value (no quotes):
 
     ```
     INSERT INTO `albums`(
@@ -170,10 +177,11 @@ Copy this script and paste **BUT EDIT** the name of the database before `albums`
         'indie',
         2007
     )
+    ```
 
-8. Repeat this process until you have 10 entries in your database.
+9.  Repeat this process until you have 10 entries in your database.
 
-## 3. Connect FastAPI to the Database
+## 3. Connect FastAPI to your Database
 
 You have now installed the necessary libraries and software for FastAPI to communicate with a database, you have updated your `Dockerfile` to match those changes, and you have created a data table with data in it.
 
@@ -189,7 +197,7 @@ Now let's write a new API endpoint that will retrieve your table data and return
 10. Next, as part of your function, set up a database connection. This will be a `MySQLdb.connection` object, which means you can reuse the connection and all of its available methods. Use the connection string and be sure the `DB` value is set as a variable in your code.
 
     ```
-        db = MySQLdb.connect(host=HOST, user=USER, passwd=PASS, db=DB)
+        db = MySQLdb.connect(host=DBHOST, user=DBUSER, passwd=DBPASS, db=DB)
     ```
 11. Next we will create a cursor, which is what executes SQL against the database service. The cursor will then execute some SQL and fetch the results. Copy this code and paste it below your DB connection string:
 
@@ -224,7 +232,7 @@ Now let's write a new API endpoint that will retrieve your table data and return
     ```
     @app.get("/albums")
     def get_all_albums():
-        db = MySQLdb.connect(host=HOST, user=USER, passwd=PASS, db=DB)
+        db = MySQLdb.connect(host=DBHOST, user=DBUSER, passwd=DBPASS, db=DB)
         c = db.cursor(MySQLdb.cursors.DictCursor)
         c.execute("SELECT * FROM albums ORDER BY name")
         results = c.fetchall()
@@ -252,7 +260,7 @@ Now let's write a new API endpoint that will retrieve your table data and return
     ```
     @app.get("/albums/{id}")
     def get_one_album(id):
-        db = MySQLdb.connect(host=HOST, user=USER, passwd=PASS, db="mst3k")
+        db = MySQLdb.connect(host=DBHOST, user=DBUSER, passwd=DBPASS, db=DB)
         c = db.cursor(MySQLdb.cursors.DictCursor)
         c.execute("SELECT * FROM albums WHERE id=" + id)
         results = c.fetchall()
