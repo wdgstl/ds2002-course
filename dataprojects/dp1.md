@@ -161,13 +161,11 @@ cd app/
     )
     ```
 
-    Here's an example entry:
+    Here's an example entry on one line:
 
     ```
     INSERT INTO `albums`(`name`, `artist`, `genre`, `year`) VALUES ('The Queen is Dead','The Smiths','pop',1986);
     ```
-
-    
 
 9.  Repeat this process until you have 10 entries in your database.
 
