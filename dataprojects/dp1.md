@@ -30,7 +30,7 @@ You may either develop/test your code locally or using Gitpod. There is no prefe
 
 ### Set Environment Variables
 
-Follow the instructions found at [**this page**](https://canvas.its.virginia.edu/courses/105117/pages/rds-credentials) in Canvas and set your `DBHOST`, `DBUSER`, and `DBPASS` environment variables in your development environment.
+Follow the instructions found at <a href="https://canvas.its.virginia.edu/courses/105117/pages/rds-credentials" target="_new" style="font-weight:bold;">this page</a> in Canvas and set your `DBHOST`, `DBUSER`, and `DBPASS` environment variables in your development environment.
 
 These `ENV` variables provide a server, username, and password for your Python to communicate with the MySQL service.
 
