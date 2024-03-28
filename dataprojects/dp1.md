@@ -143,7 +143,7 @@ cd app/
 
 7. Click on the INSERT tab at the top of the screen. Using the top form entry, add a favorite album of yours to the database. Leave the ID entry empty, but add an album NAME, ARTIST, GENRE, and YEAR. Then press GO to save it.
 
-8. Next let's add more entries using direct SQL. Click into the SQL tab again. Copy the code below and modify it for another entry. The `id` should have the value of `NULL` (no quotes) and the `year` should have a 4-digit integer value (no quotes):
+8. Next let's add more entries using direct SQL. Click into the SQL tab again. Copy the code below and modify it for another entry. Since the `id` column auto-increments you can pass either `NULL` for its value or omit it altogether. The `year` column should have a 4-digit integer value (no quotes):
 
     ```
     INSERT INTO `albums`(
@@ -164,20 +164,10 @@ cd app/
     Here's an example entry:
 
     ```
-    INSERT INTO `albums`(
-        `id`, 
-        `name`, 
-        `artist`, 
-        `genre`, 
-        `year`
-    ) VALUES (
-        NULL,
-        'Wincing the Night Away',
-        'The Shins',
-        'indie',
-        2007
-    )
+    INSERT INTO `albums`(`name`, `artist`, `genre`, `year`) VALUES ('The Queen is Dead','The Smiths','pop',1986);
     ```
+
+    
 
 9.  Repeat this process until you have 10 entries in your database.
 
