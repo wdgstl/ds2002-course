@@ -13,7 +13,7 @@ Here are the steps:
     - [Set Environment Variables](#set-environment-variables)
     - [Python Installation](#python-installation)
     - [Update your `Dockerfile`](#update-your-dockerfile)
-    - [Gitpod Configuration](#gitpod-configuration)
+    - [Gitpod Configuration File](#gitpod-configuration-file)
     - [Python Imports](#python-imports)
     - [Static Files](#static-files)
     - [Preview Script](#preview-script)
@@ -62,9 +62,9 @@ COPY requirements.txt requirements.txt
 RUN pip install --upgrade pip && pip install -r requirements.txt
 ```
 
-### Gitpod Configuration
+### Gitpod Configuration File
 
-If using Gitpod, edit `.gitpod.yml` and update the `port` value from 8000 to 8000-9000.
+Replace the contents of your `.gitpod.yml` file with <a href="https://gist.github.com/nmagee/828db0b668518ee397326bd5407b82b2" target="_new">this configuration</a>.
 
 ### Python Imports
 
