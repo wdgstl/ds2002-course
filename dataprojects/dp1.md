@@ -37,18 +37,18 @@ These `ENV` variables provide a server, username, and password for your Python t
 
 ### Python Installation
 
-At the end of your `requirements.txt` file you should add an entry:
+At the end of your `requirements.txt` file add a new line:
 ```
 mysqlclient
 ```
-And then in your environment (local computer or Gitpod) run this command:
+In your environment (local computer or Gitpod) run this command:
 ```
 python3 -m pip install mysqlclient
 ```
 
-This installation allows you to import the `MySQLdb` package for database communications.
+This installs the `MySQLdb` package for database communications.
 
-If you are developing locally and run into installation problems with this package, you'll need to Google around for a working solution.
+(If you are developing locally and run into installation problems with this package, you'll need to Google around for a working solution.)
 
 ### Update your `Dockerfile`
 
