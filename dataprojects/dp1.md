@@ -16,7 +16,6 @@ Here are the steps:
     - [Gitpod Configuration File](#gitpod-configuration-file)
     - [Python Imports](#python-imports)
     - [Static Files](#static-files)
-    - [Preview Script](#preview-script)
   - [2. Database Prep](#2-database-prep)
   - [3. Connect FastAPI to your Database](#3-connect-fastapi-to-your-database)
   - [4. Add an endpoint to fetch a single album](#4-add-an-endpoint-to-fetch-a-single-album)
@@ -97,29 +96,12 @@ Within the `app/` directory of your FastAPI, create a new subdirectory named `st
 - [`script.js`](static/script.js) - The logic of the page that communicates with your API.
 - [`styles.css`](static/styles.css) - A stylesheet for decorating the HTML file.
 
-These files will dynamically communicate with your API to fetch data and display it in a human-readable page.
+These files interact with your API to fetch data and display it in a human-readable format.
 
 Take the time to read through the code and see what you can understand.
 
 The static page configuration now means that your FastAPI deployment has an additional endpoint: `/static/index.html` appended to your API's URL will display this page.
 
-### Preview Script
-
-Your forked repository has a shell script `preview.sh` that can run your `uvicorn` web server locally. 
-
-If you are developing locally, update this script to reflect the path for `uvicorn`. You can find its path:
-
-```
-which uvicorn
-```
-Use the path displayed as the start of the command. Or you may want to try something more generic based on your environment:
-
-```
-#!/bin/bash
-
-cd app/
-/usr/bin/env uvicorn main:app --reload --log-level debug
-```
 
 ## 2. Database Prep
    
@@ -167,7 +149,7 @@ cd app/
     INSERT INTO `albums`(`name`, `artist`, `genre`, `year`) VALUES ('The Queen is Dead','The Smiths','pop',1986);
     ```
 
-9.  Repeat this process until you have 10 entries in your database.
+9.  Repeat this process until you have at least 10 entries in your database.
 
 ## 3. Connect FastAPI to your Database
 
