@@ -2,32 +2,34 @@
 
 ## Setup
 
-If you have completed [**Data Project 1**](https://canvas.its.virginia.edu/courses/105117/assignments/480360) or attended class on 3/28/24 you have already completed the following:
+1. If you have completed [**Data Project 1**](https://canvas.its.virginia.edu/courses/105117/assignments/480360) or attended class on 3/28/24 you have already completed the following:
 
-1. Populated `ENV` variables for connecting to the database service.
-2. Created a database named after your UVA computing ID, i.e. `mst3k`
-3. Created a table and populated it with data.
+    1. Populated `env` variables for connecting to the database service.
+    2. Created a database named after your UVA computing ID, i.e. `mst3k`
+    3. Created a table and populated it with data.
 
-If you need to complete these steps yourself:
+2. If you need to complete these steps yourself:
 
-1. Refer to the [**RDS Credentials**](https://canvas.its.virginia.edu/courses/105117/pages/rds-credentials) page in Canvas for ENV variables.
-2. If using Gitpod, install the `mysql` command-line tool by running this command:
+    1. Refer to the [**RDS Credentials**](https://canvas.its.virginia.edu/courses/105117/pages/rds-credentials) page in Canvas for `env` variables.
+    2. If using Gitpod, install the `mysql` command-line tool by running this command:
    
-    ```
-    sudo apt install -y mysql-client
-    ```
+        ```
+        sudo apt install -y mysql-client
+        ```
+
+3. If you are using Gitpod, edit your `.gitpod.yml` file and where you see `port: 8000` change it to `port: 8000-8100`.
 
 ## Connect to the database service
 
 You may use either the `mysql` command-line program for your work here, or use PhpMyAdmin's user interface to run SQL commands using the SQL tab within your database.
 
-To run the `mysql` CLI use this syntax. This assumes you have your `ENV` variables set as described above. Notice the absence of spaces after the `-u` and `-p` options (username and password fields).
+To run the `mysql` CLI use this syntax. This assumes you have your `env` variables set as described above. Notice the absence of spaces after the `-u` and `-p` options (username and password fields).
 
 ```
 mysql -h $DBHOST -u$DBUSER -p$DBPASS
 ```
 
-To run PhpMyAdmin either locally or in Gitpod, run this command. This assumes you have your `ENV` variables set as described above.
+To run PhpMyAdmin either locally or in Gitpod, run this command. This assumes you have your `env` variables set as described above.
 
 ```
 docker run -d -e PMA_HOST=$DBHOST -e PMA_USER=$DBUSER -e PMA_PASSWORD=$DBPASS -p 8001:80 phpmyadmin
