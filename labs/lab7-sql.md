@@ -65,7 +65,7 @@ Run the `describe tracking;` command to see the schema:
 For purposes of inserting mock data, here are some suggestions:
 
 - `file` - A simple file name. Imagine these are `.csv` files.
-- `owner` - The name of the researcher who is working with the data.
+- `owner` - The user ID of the researcher who is working with the data.
 - `updated` - A date for when the last step occurred with this data. This takes `YYYY-MM-DD` format.
 - `step` - An integer indicating which step of the workflow was completed most recently (e.g. 1-7).
 - `source` - The name of the data source.
@@ -75,7 +75,7 @@ For purposes of inserting mock data, here are some suggestions:
 Using either the `mysql` CLI or the PhpMyAdmin user interface (click the INSERT tab), add data to your new table. Here is a sample entry you can use:
 
 ```
-INSERT INTO `tracking` (`id`, `file`, `owner`, `updated`, `step`, `source`) VALUES (NULL, 'BkJrynaRf4gu.csv', 'nem2p', '2024-02-08', '4', 'NSF')
+INSERT INTO `tracking` (`id`, `file`, `owner`, `updated`, `step`, `source`) VALUES (NULL, 'BkJrynaRf4gu.csv', 'mst3k', '2024-02-08', '4', 'NSF')
 ```
 **Repeat this process and create at least 20 entries in your table.** Be sure to vary your `owner` field to use 3-4 different owners, a few different sources, and a few different dates.
 
@@ -147,6 +147,8 @@ Delete a record. Let's delete a record based on a specific row `id`:
 ```
 DELETE FROM tracking WHERE id=19;
 ```
+
+Take some time to practice more SELECT, INSERT, DELETE, and UPDATE queries.
 
 ## Create a second table and add data
 
@@ -247,6 +249,8 @@ Some notes:
 ### Your Turn
 
 Now write a query that lists the `file`, `step`, and owner `name` for researchers who have NOT yet completed the training. Order the results by ascending order from the `updated` column.
+
+Run the query to test or debug your results.
 
 ## Submit your work
 
