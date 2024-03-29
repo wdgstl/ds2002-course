@@ -276,4 +276,4 @@ You will need to submit three (3) pieces for this Data Project:
 
 - A screenshot of your `/albums` JSON from your web browser
 - A screenshot of your `/static/` page showing cards for all your albums.
-- The URL to your `app/main.py` code in GitHub.
+- The URL to your `FastAPI` repository in GitHub.
