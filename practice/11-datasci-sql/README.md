@@ -7,10 +7,11 @@
 
 ## Set up Gitpod
 
-1. Install the `mysql` client from the Gitpod terminal:
+1. Install the `mysql` client from the Gitpod terminal and for supporting the `MySQLdb` package:
 
     ```
     sudo apt install -y mysql-client
+    pip install mysqlclient
     ```
 
 2. Run the `mysql` command-line client:
@@ -41,9 +42,32 @@ DELETE
 
 ## Practice with SQL queries using Python
 
+### imports
+
+import json
+import os
+import MySQLdb
+
 ### Connection Strings
 
 ### Cursor
 
 ### Query
 
+import json
+import os
+import MySQLdb
+
+# db config stuff
+DBHOST = os.environ.get('DBHOST')
+DBUSER = os.environ.get('DBUSER')
+DBPASS = os.environ.get('DBPASS')
+DB = "nem2p"
+
+db = MySQLdb.connect(host=DBHOST, user=DBUSER, passwd=DBPASS, db=DB)
+cursor = db.cursor(MySQLdb.cursors.DictCursor)
+cursor.execute("SELECT * FROM albums ORDER BY name")
+results = cursor.fetchall()
+db.close()
+
+print(results)
