@@ -4,7 +4,8 @@ create table mock_data (
 	last_name VARCHAR(50),
 	email VARCHAR(50),
 	gender VARCHAR(50),
-	ip_address VARCHAR(20)
+	ip_address VARCHAR(20),
+	PRIMARY KEY (id)
 );
 insert into mock_data (id, first_name, last_name, email, gender, ip_address) values (1, 'Melesa', 'Dagworthy', 'mdagworthy0@amazon.co.uk', 'Female', '153.177.184.65');
 insert into mock_data (id, first_name, last_name, email, gender, ip_address) values (2, 'Alethea', 'Kender', 'akender1@moonfruit.com', 'Female', '246.29.12.42');
