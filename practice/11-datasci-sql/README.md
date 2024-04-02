@@ -82,7 +82,7 @@ cursor.execute("SELECT * FROM mock_data ORDER BY last_name LIMIT 20")
 results = cursor.fetchall()
 ```
 
-## Complete SELECT Example
+### Complete SELECT Example
 ```
 import json
 import os
@@ -127,7 +127,7 @@ Finally, perform the commit:
 db.commit()
 ```
 
-### Full Example
+### Complete INSERT Example
 ```
 import json
 import os
