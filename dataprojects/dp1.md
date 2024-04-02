@@ -272,8 +272,8 @@ Try adding or removing albums to your database table and verify the results are 
 
 ## 6. Submit your work
 
-You will need to submit three (3) pieces for this Data Project:
+You will need to submit three (3) pieces for this Data Project. Create an "images/" directory in your FastAPI repository and add the two images below. Then add/commit/push them, and submit the URL to your FastAPI repo in GitHub.
 
-- A screenshot of your `/albums` JSON from your web browser
-- A screenshot of your `/static/` page showing cards for all your albums.
-- The URL to your `FastAPI` repository in GitHub.
+- Add a screenshot of your `/albums` JSON from your web browser
+- Add a screenshot of your `/static/` page showing cards for all your albums.
+- Submit the URL to your `FastAPI` repository in GitHub.
