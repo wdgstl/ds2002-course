@@ -1,8 +1,8 @@
-image: ghcr.io/ds3002/course:latest
+# image: ghcr.io/ds3002/course:latest
 
-tasks:
-  - command: ./catchup
+# tasks:
+#   - command: ./catchup
 
-github:
-  prebuilds:
-    main: true
+# github:
+#   prebuilds:
+#     main: true
