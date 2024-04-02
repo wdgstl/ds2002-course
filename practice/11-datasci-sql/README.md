@@ -44,30 +44,50 @@ DELETE
 
 ### imports
 
+```
 import json
 import os
 import MySQLdb
+```
 
-### Connection Strings
+### `env` variables
 
-### Cursor
-
-### Query
-
-import json
-import os
-import MySQLdb
-
+```
 # db config stuff
 DBHOST = os.environ.get('DBHOST')
 DBUSER = os.environ.get('DBUSER')
 DBPASS = os.environ.get('DBPASS')
 DB = "nem2p"
+```
 
+### Connection Strings
+
+```
+db = MySQLdb.connect(host=DBHOST, user=DBUSER, passwd=DBPASS, db=DB)
+```
+
+### Cursor
+
+Create the cursor. Create one with and without a `DictCursor`.
+
+```
+cursor = db.cursor()
+cursor = db.cursor(MySQLdb.cursors.DictCursor)
+```
+
+### Query
+
+```
+cursor.execute("SELECT * FROM albums ORDER BY name")
+results = cursor.fetchall()
+```
+
+## Complete Example
+```
 db = MySQLdb.connect(host=DBHOST, user=DBUSER, passwd=DBPASS, db=DB)
 cursor = db.cursor(MySQLdb.cursors.DictCursor)
 cursor.execute("SELECT * FROM albums ORDER BY name")
 results = cursor.fetchall()
 db.close()
-
 print(results)
+```
