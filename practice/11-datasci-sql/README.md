@@ -1,5 +1,12 @@
 # Hands-On SQL for Data Science
 
+Reference files / commands:
+
+- [`data.sql`](./data.sql) | [`data_select.py`](./data_select.py)
+- [`logistics.sql`](./logistsics.sql) | [`logistics_query.py`](./logistics_query.py)
+- [Command Reference](./sql-examples.md)
+- [Additional SQL Examples](./more.md)
+
 ## Setup your repo
 1. Go to your fork of the `ds2002-course` repository in GitHub.
 2. Use the "Sync Fork" button at the top of the page to sync and update your branch with the upstream repo.
@@ -28,9 +35,14 @@
 
 ## Load Data from SQL Files
 
-1. Open the `practice/11-datasci-sql` directory and open `data.sql`.
-2. Let's browse the contents of the file.
-3. How do we run a script using the command-line?
+1. Open the `data.sql` script and read the SQL commands it contains.
+2. To insert SQL data fromo a `.sql` script via the command-line:
+
+    ```
+    mysql -h $DBHOST -u$DBUSER -p$DBPASS db-name < script.sql
+    ```
+
+    Be sure to update the commands above specifying your own `db-name` and pointing to the correct `.sql` file.
 
 ## Practice with SQL queries in the CLI
 
@@ -39,6 +51,8 @@ SELECT
 UPDATE
 DELETE
 ```
+
+See [this page](./sql-examples.md) for examples.
 
 ## Practice with SQL queries using Python
 
