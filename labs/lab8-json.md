@@ -1,6 +1,6 @@
 # Lab 7 - JavaScript Object Notation (JSON)
 
-## Setup
+## 0. Setup
 
 1. If you have not already, fork this repository: [**https://github.com/nmagee/json-practice/**](https://github.com/nmagee/json-practice/)
 2. Open your repository in either Gitpod or locally.
@@ -9,7 +9,7 @@
 3. Refer to documentation within that repository as needed, and follow the instructions closely below.
 4. You will submit two snippets of code for this lab. Create a folder in your fork of `json-practice` and create a subfolder named `lab8`. Place your two scripts in that directory, add/commit/push them, then submit the URL to your repository for grading.
 
-## Parse JSON with `jq`
+## 1. Parse JSON with `jq`
 
 Review the instructions for how to parse JSON with `jq` on [this page](https://github.com/nmagee/json-practice/tree/main/jq). 
 
@@ -41,7 +41,7 @@ Your script should output something like this with no more than 6 lines:
 "2024-04-09 08:56:11"
 ```
 
-## Parse JSON with Python
+## 2. Parse JSON with Python
 
 1. Review the file `data/schacon.repos.json` and notice it lists the first 30 repositories owned by Scott Chacon in GitHub. Each entry has around 100 data points.
 
@@ -76,7 +76,7 @@ agitmemnon-server,https://github.com/schacon/agitmemnon-server,2024-02-05T21:14:
 amp,https://github.com/schacon/amp,2017-06-29T22:21:55Z,public
 ```
 
-## Submit your work
+## 3. Submit your work
 
 Submit two snippets of code for this lab. Create a folder in your fork of `json-practice` and create a subfolder named `lab8`. Place your two scripts in that directory (one in `bash` one in `python`), add/commit/push them, then submit the URL to your repository for grading.
 
