@@ -1,27 +1,31 @@
-# MongoDB Lab
+# Lab 9: MongoDB
 
-- [Run MongoDB & Connect](#run-mongodb--connect)
-- [Exercise 1](#exercise-1)
-- [Exercise 2](#exercise-2)
-- [Reference: CRUD Operations](#reference-crud-operations)
-- [Integrating with `python3`](#integrating-with-python3)
+- [Lab 9: MongoDB](#lab-9-mongodb)
+  - [Run MongoDB \& Connect](#run-mongodb--connect)
+  - [Exercise 1](#exercise-1)
+  - [Exercise 2](#exercise-2)
+  - [Reference: CRUD Operations](#reference-crud-operations)
+  - [Integrating with `python3`](#integrating-with-python3)
 
 ## Run MongoDB & Connect
 
 **Setup**
 
-This course will be using MongoDB Atlas, a cloud-based Mongo service, for hands-on exercises. Follow the instructions in the [**How To video**](https://www.youtube.com/watch?v=5-tIfDCb-T4) for setup. I recommend
+This course will be using MongoDB Atlas, a cloud-based Mongo service, for hands-on exercises. Follow the instructions in the [**How To video**](https://www.youtube.com/watch?v=9DbZ2ii01ew) for setup. I recommend
 using a Google account when creating your [**Atlas MongoDB Cluster**](https://www.mongodb.com/cloud/atlas/register).
 
 [![Create MongoDB Atlas Account](https://nmagee.github.io/ds3002/images/google-signup.png)](https://account.mongodb.com/account/sso/google?signupSource=&referer=null)
 
 **Connect**
 
-The DS3002 course container contains the `mongo` shell application. From MongoDB Atlas, click on the CONNECT button of your cluster
-and select "Connect with the Mongo shell." This will give you a connection string:
+Install the `mongosh` client for your laptop. Or use a Gitpod environment and run the installer:
+```
+sudo apt update
+sudo apt install mongosh
+```
 
 ```
-mongo "mongodb+srv://cluster0.pguxs.mongodb.net/myFirstDatabase" --username <username>
+mongosh "mongodb+srv://cluster0.pguxs.mongodb.net/myFirstDatabase" --username <username>
 ```
 
 Customize the command slightly:
