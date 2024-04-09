@@ -14,8 +14,6 @@
 This course will be using MongoDB Atlas, a cloud-based Mongo service, for hands-on exercises. Follow the instructions in the [**How To video**](https://www.youtube.com/watch?v=9DbZ2ii01ew) for setup. I recommend
 using a Google account when creating your [**Atlas MongoDB Cluster**](https://www.mongodb.com/cloud/atlas/register).
 
-[![Create MongoDB Atlas Account](https://nmagee.github.io/ds3002/images/google-signup.png)](https://account.mongodb.com/account/sso/google?signupSource=&referer=null)
-
 **Connect**
 
 Install the `mongosh` client for your laptop. Or use a Gitpod environment and run the installer:
@@ -25,18 +23,17 @@ sudo apt install mongosh
 ```
 
 ```
-mongosh "mongodb+srv://cluster0.pguxs.mongodb.net/myFirstDatabase" --username <username>
+mongosh "mongodb+srv://cluster0.pguxs.mongodb.net/" --username <username>
 ```
 
 Customize the command slightly:
 
-- Remove `myFirstDatabase` from the connection string.
-- Replace `<username>` with the user you created.
+- Replace `<USERNAME>` and `<PASSWORD>` with the user you created.
 
 You will be prompted for your password and should then gain a prompt:
 
 ```
-root@a18a980325ad:/workspaces/course# mongo "mongodb+srv://cluster0.pguxs.mongodb.net" --username mongo
+root@a18a980325ad:/workspaces/course# mongosh "mongodb+srv://USERNAME:PASSWORD@cluster0.xxxx.mongodb.net" --username mongo
 MongoDB shell version v4.4.4
 Enter password: 
 connecting to: mongodb://cluster0-shard-00-00.pguxs.mongodb.net:27017,cluster0-shard-00-01.pguxs.mongodb.net:27017,cluster0-shard-00-02.pguxs.mongodb.net:27017/?authSource=admin&compressors=disabled&gssapiServiceName=mongodb&replicaSet=atlas-f0pmyi-shard-0&ssl=true
@@ -45,7 +42,7 @@ MongoDB server version: 4.4.4
 MongoDB Enterprise atlas-f0pmyi-shard-0:PRIMARY> 
 ```
 
-After watching the [**Mongo in 30 minutes**](https://www.youtube.com/watch?v=pWbMrx5rVBE) video, try completing one of 
+After watching the [**MongoDB Crash Course**]([https://www.youtube.com/watch?v=pWbMrx5rVBE](https://www.youtube.com/watch?v=ofme2o29ngU)) video, complete one of 
 these two exercises:
 
 ## Exercise 1
