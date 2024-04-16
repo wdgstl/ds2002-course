@@ -19,7 +19,7 @@ The NOAA Aviation Weather API has built-in documentation (look who else uses Fas
 
 Retrieve data from this URL, which is for the KMCI (Kansas City) airport, output into JSON format, showing the last 12 hours, bound by a small geographic box:
 ```
-curl "https://aviationweather.gov/api/data/metar?ids=KMCI&format=json&taf=false&hours=12&bbox=40%2C-90%2C45%2C-85" > aviation.json
+curl -s "https://aviationweather.gov/api/data/metar?ids=KMCI&format=json&taf=false&hours=12&bbox=40%2C-90%2C45%2C-85" > aviation.json
 ```
 
 Note that you need to wrap this URL in quotes when using `curl` from the command-line.
