@@ -43,7 +43,7 @@ Your script should output something like this with no more than 6 lines:
 
 ## 2. Parse JSON with Python
 
-1. Review the file `data/schacon.repos.json` and notice it lists the first 30 repositories owned by Scott Chacon in GitHub. Each entry has around 100 data points.
+1. Review the file [`data/schacon.repos.json`](data/schacon.repos.json) and notice it lists the first 30 repositories owned by Scott Chacon in GitHub. Each entry has around 100 data points.
 
 2. Recall that reading a file into Python looks something like this (in read-only mode):
 
