@@ -1,4 +1,4 @@
-# Lab 7 - JavaScript Object Notation (JSON)
+# Lab 8 - JavaScript Object Notation (JSON)
 
 ## 0. Setup
 
