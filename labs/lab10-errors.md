@@ -1,5 +1,7 @@
 # Lab 10 - Python Error Handling
 
+First read [this page](https://docs.python.org/3/library/exceptions.html) from Python documentation.
+
 The basics:
 
 - The `try` block lets you test a block of code for errors.
